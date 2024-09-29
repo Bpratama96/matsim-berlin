@@ -37,7 +37,7 @@ public class OpenBerlinScenario extends MATSimApplication {
 	private final SampleOptions sample = new SampleOptions(10, 25, 3, 1);
 
 	public OpenBerlinScenario() {
-		super(String.format("input/v%s/berlin-v%s.config.xml", VERSION, VERSION));
+		super(String.format("input/v%s/berlin-v%s.config_simulation.xml", VERSION, VERSION));
 	}
 
 	public static void main(String[] args) {
@@ -87,6 +87,13 @@ public class OpenBerlinScenario extends MATSimApplication {
 			new ReplanningConfigGroup.StrategySettings()
 				.setStrategyName(DefaultPlanStrategiesModule.DefaultStrategy.TimeAllocationMutator)
 				.setWeight(0.15)
+				.setSubpopulation("person")
+		);
+
+		config.replanning().addStrategySettings(
+			new ReplanningConfigGroup.StrategySettings()
+				.setStrategyName(DefaultPlanStrategiesModule.DefaultStrategy.ChangeTripMode)
+				.setWeight(0.8)
 				.setSubpopulation("person")
 		);
 
